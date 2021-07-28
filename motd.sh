@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 clear
 printf "\n"
-curl ipinfo.io
+curl --silent https://motd.deltasec.systems/ascii_name
 printf "\n"
