@@ -6,8 +6,12 @@ trim() {
   echo "$s"
 }
 
-_delta_DISTRONAME=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
+. /etc/os-release
+_delta_DISTRONAME=$NAME
 _delta_CPUCLOCK="$(lscpu | sed -n 's/CPU max MHz:[ \t]*//p')"
+if [ "$_delta_CPUCLOCK" = "" ]; then
+  _delta_CPUCLOCK="$(lscpu | sed -n 's/CPU MHz:[ \t]*//p')"
+fi
 _delta_STORAGEUSED=$(df -Pk . | sed 1d | grep -v used | awk '{ print $3 "\t" }')
 _delta_STORAGE=$(df -Pk . | sed 1d | grep -v used | awk '{ print $1 "\t" }')
 _delta_STORAGE=$(trim "$_delta_STORAGE")
