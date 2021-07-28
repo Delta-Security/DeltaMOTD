@@ -8,5 +8,8 @@ else
 fi
 
 if [ "$SESSION_TYPE" = "remote/ssh" ]; then
+  clear
+  printf "\n" 
   curl --silent https://motd.deltasec.systems/motd.sh | bash -E -
+  printf "\n"
 fi
